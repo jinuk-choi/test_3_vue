@@ -81,7 +81,7 @@ export default new Vuex.Store({
     localStorage.removeItem("token")
     console.log(state.Userinfo)
     console.log("로그아웃됐니?"+localStorage.getItem("token"))
-    // Route.push("/login")
+    Route.push("/")
    }
   },
   actions: {

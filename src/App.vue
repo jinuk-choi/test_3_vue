@@ -60,12 +60,18 @@
 </template>
 
 <script>
-export default {
-  
+import {mapMutations, mapState} from "vuex"
 
-
-
-  
-  }
+  export default {
+    data: () => ({
+      drawer: null,
+    }),
+    computed: {
+      ...mapState(["Userinfo"])
+    },
+    methods: {
+      ...mapMutations(["logout"])
+    }
+  }  
 
 </script>
