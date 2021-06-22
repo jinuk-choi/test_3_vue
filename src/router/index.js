@@ -1,29 +1,52 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import HelloWorld from '@/components/HelloWorld'; //메인 컴포넌트 호출
+import List from '@/components/board/List'; //게시판 리스트 컴포넌트 호출
+import Write from '@/components/board/Write'; //게시판 작성 컴포넌트 호출
+import Login from '@/components/board/Login'; //로그인 컴포넌트 호출
+import SignUp from '@/components/board/SignUp'; //로그인 컴포넌트 호출
+import User from '@/views/User'; //로그인 컴포넌트 호출
 
-Vue.use(VueRouter)
+Vue.use(Router); //vue 라우터 사용
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+export default new Router({ //라우터 연결
+	routes:[
+		{
+			path:'/'
+			,name:HelloWorld
+			,component:HelloWorld
+		}
+		,{
+			path:'/board/list'
+			,name:List
+			,component:List
+		}
+		
+		,{
+			path:'/board/write'
+			,name:Write
+			,component:Write
+		}
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+		,{
+			path:'/board/login'
+			,name:'Login'
+			,component:Login
+		}
+
+		,{
+			path:'/board/signUp'
+			,name:'SignUp'
+			,component:SignUp
+		}
+
+		,{
+			path:'/user'
+			,name:User
+			,component:User
+		}
+		
+	]
+
+	
 })
-
-export default router
