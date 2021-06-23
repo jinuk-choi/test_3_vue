@@ -54,12 +54,12 @@ export default new Vuex.Store({
    },
    SET_BOARDDETAIL(state,data) {
      state.board_detail=data
-     Route.push("/boardDetail/"+data.bId)
+     Route.push("/board/boardDetail/"+data.aIdx)
    },
    SET_BOARDDELETE(state,data) {
-     var index = state.boardlist.findIndex(i => i.bId == data);
+     var index = state.boardlist.findIndex(i => i.aIdx == data);
      state.boardlist.splice(index, 1);
-     Route.push("/boardlist")
+     Route.push("/board/boardlist")
    },
    READ_USER_LIST(state,data) {
     state.UserList = data
@@ -144,7 +144,7 @@ export default new Vuex.Store({
     return new Promise((resolve, reject) => {
       axios.get('http://localhost:9100/api/test/boardDetail', {
         params: {
-          bId: payload
+          aIdx: payload
         }
       })
           .then(Response => {
@@ -161,7 +161,7 @@ export default new Vuex.Store({
   BoardDelete({commit},payload) {
     console.log(payload)
     return new Promise((resolve, reject) => {
-      axios.delete('http://localhost:9100/api/test/boardDelete/'+payload.bId)
+      axios.delete('http://localhost:9100/api/test/boardDelete/'+payload.aIdx)
           .then(Response => {
               console.log(Response.data)
               commit('SET_BOARDDELETE', Response.data)

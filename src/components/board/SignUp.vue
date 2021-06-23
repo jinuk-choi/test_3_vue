@@ -1,61 +1,83 @@
 <template>
-  <div>
-    <h1>SignUp</h1>
-    <v-text-field
-      label="아이디"
-      v-model="userId"
-    ></v-text-field>
-    <v-text-field
-      label="비밀번호"
-      type="password"
-      v-model="password"
-    ></v-text-field>
-    <v-text-field
-      label="이름"
-      v-model="name"
-    ></v-text-field>
-    <v-text-field
-      label="주소"
-      v-model="address"
-    ></v-text-field>
-    <v-text-field
-      label="이미지"
-      v-model="src"
-    ></v-text-field>
-    <v-btn @click="signUp">회원가입</v-btn>
-  </div>
+<v-container style="max-width:500px">
+    <v-layout>
+        <v-flex xs12>
+            <v-card class="elevation-12">
+                <v-toolbar
+                color="#FBC02D"
+                dark
+                flat
+                >
+                <v-toolbar-title>
+                    회원가입 
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                </v-toolbar>
+                <v-card-text>
+                <v-form>
+                    <v-text-field
+                    label="Id"
+                    name="username"
+                    prepend-icon="mdi-account"
+                    v-model="username"
+                    type="text"
+                    ></v-text-field>
+
+                    <v-text-field
+                    id="UserPassword"
+                    label="Password"
+                    name="password"
+                    prepend-icon="mdi-lock"
+                    v-model="password"
+                    type="password"
+                    ></v-text-field>
+
+                    <v-text-field
+                    id="UserName"
+                    label="Name"
+                    name="name"
+                    v-model="name"
+                    prepend-icon="mdi-card-account-details"
+                    type="text"
+                    ></v-text-field>
+
+                </v-form>
+                </v-card-text>
+                <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="#FBC02D" @click="SignUp({username: username, password: password, name:name})">Sign Up</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-flex>
+    </v-layout>
+</v-container>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
-        userId: null,
-        password: null,
-        name: null,
-        address: null,
-        src: null
+        username:null,
+        password:null,
+        name:null
       }
     },
+
     methods: {
-      signUp() {
-        let userObj = {
-          userId: this.userId,
-          password: this.password,
-          name: this.name,
-          address: this.address,
-          src: this.src
-        }
-        EventBus.$emit('signUp', userObj)
-        this.clearForm()
-      },
-      clearForm() {
-        this.userId = null,
-        this.password = null,
-        this.name = null,
-        this.address = null,
-        this.src = null
-      }
+      ...mapActions(['SignUp']),
+      // SignUp() {
+      //   let Users = {
+      //     UserId:this.UserId,
+      //     UserPassword:this.UserPassword,
+      //     UserName:this.UserName,
+      //     UserPhone:this.UserPhone
+      //   }
+      //   console.log(Users)
+      //   this.NewUsers(Users)
+      //  // console.log("UserId : "+this.UserId+" UserPassword : "+this.UserPassword + " UserName : " + this.UserName + " UserPhone : " + this.UserPhone)
+      // }
     }
   }
 </script>
