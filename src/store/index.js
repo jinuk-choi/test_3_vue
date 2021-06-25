@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     Userinfo:{User_Id:null,User_Name:null,User_auth:[],User_token:null},
-    boardlist:[],
+
     board_detail:[],
     UserList:[]
   },
@@ -49,18 +49,17 @@ export default new Vuex.Store({
       state.Userinfo.User_token = data.token
       Route.push("/user")
    },
-   SET_BOARDLIST(state,data) {
-     state.boardlist = data
-   },
+  
+ 
    SET_BOARDDETAIL(state,data) {
      state.board_detail=data
      Route.push("/board/boardDetail/"+data.aIdx)
    },
-   SET_BOARDDELETE(state,data) {
-     var index = state.boardlist.findIndex(i => i.aIdx == data);
-     state.boardlist.splice(index, 1);
-     Route.push("/board/boardlist")
-   },
+  //  SET_BOARDDELETE(state,data) {
+  //    var index = state.boardlist.findIndex(i => i.aIdx == data);
+  //    state.boardlist.splice(index, 1);
+  //    Route.push("/board/boardlist")
+  //  },
    READ_USER_LIST(state,data) {
     state.UserList = data
    },
@@ -127,19 +126,7 @@ export default new Vuex.Store({
             })
     })
    },
-   boardList({commit}) {
-    return new Promise((resolve, reject) => {
-        axios.get('http://localhost:9100/api/test/user')
-            .then(Response => {
-                console.log(Response.data)
-                commit('SET_BOARDLIST', Response.data)
-            })
-            .catch(Error => {
-                console.log('error')
-                reject(Error)
-            })
-    })
-   },
+
    boardDetail({commit},payload) {
     return new Promise((resolve, reject) => {
       axios.get('http://localhost:9100/api/test/boardDetail', {
