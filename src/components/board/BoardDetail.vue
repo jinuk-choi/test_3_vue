@@ -2,13 +2,13 @@
   <v-flex xs12>
         <table>
         <tr>
-          <td colspan="2" style="font-weight:700;"> {{board_detail.aTitle}}</td>
+          <td colspan="2" style="font-weight:700;">제목: {{board_detail.aTitle}}</td>
         </tr>
         <tr style="font-size:0.9rem;">
-          <td style="text-align:right">{{board_detail.aDate}}</td>
+          <td style="text-align:right">작성일: {{board_detail.aDate}}</td>
         </tr>
         <tr>
-          <td colspan="2" style="border:none;">{{board_detail.aContent}}</td>
+          <td colspan="2" style="border:none;">내용: {{board_detail.aContent}}</td>
         </tr>
         <tr>
           <td colspan="2" style="border:none;text-align:right;border-top:3px double #ededed">

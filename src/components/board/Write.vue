@@ -6,10 +6,11 @@
                 name="writer_title"
                 label="제목"
             ></v-text-field>
-          <v-textarea
+            <v-textarea
             name="writer_content"
             rows="6"
             value="내용을 입력해주세요"
+            label="내용"
             ></v-textarea>
         </v-form>
         <v-btn @click="boardWrite({userId:writer_id})">등록</v-btn>

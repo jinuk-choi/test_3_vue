@@ -55,11 +55,11 @@ export default new Vuex.Store({
      state.board_detail=data
      Route.push("/board/boardDetail/"+data.aIdx)
    },
-  //  SET_BOARDDELETE(state,data) {
-  //    var index = state.boardlist.findIndex(i => i.aIdx == data);
-  //    state.boardlist.splice(index, 1);
-  //    Route.push("/board/boardlist")
-  //  },
+   SET_BOARDDELETE(state,data) {
+     var index = state.boardlist.findIndex(i => i.aIdx == data);
+     state.boardlist.splice(index, 1);
+     Route.push("/board/boardlist")
+   },
    READ_USER_LIST(state,data) {
     state.UserList = data
    },

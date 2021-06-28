@@ -19,9 +19,10 @@ export default new Router({ //라우터 연결
 			,component:HelloWorld
 		}
 		,{
-			path:'/board/boardlist'
+			path:'/board/boardlist/'
 			,name:'BoardList'
 			,component:BoardList
+			,props: true
 		}
 		
 		,{

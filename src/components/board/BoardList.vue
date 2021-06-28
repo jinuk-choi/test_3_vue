@@ -25,9 +25,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr
+          <tr 
             v-for="item in List"
             :key="item.aIdx"
+            @click="boardDetail(item.aIdx)"
           >
             <td>{{ item.rownum }}</td>
             <td>{{ item.user.name }}</td>
@@ -40,7 +41,9 @@
           <div class="text-xs-center">
             <v-pagination
               v-model="page"
-              :length="5"
+              :length="pagination.lastPage"
+              :total-visible="8"
+              @input="next(page)"
             ></v-pagination>
           </div>
       </template>
@@ -53,8 +56,8 @@ export default {
   
   data () {
       return {
-        page: 1,
         pagination: null,
+        page: null,
         List: null
       }
   },
@@ -66,6 +69,19 @@ export default {
   },
   methods: {
     ...mapActions(['boardDetail','boardWrite']),
+
+    next (page) {
+      axios.get('http://localhost:9100/api/test/user/'+page )
+        .then(Response => {
+            console.log(Response.data)
+            this.pagination = Response.data
+            this.List = this.pagination.boardList
+        })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+        })
+    },
 
     boardList() {
       return new Promise((resolve, reject) => {
@@ -84,3 +100,4 @@ export default {
   }
 }
 </script>
+
