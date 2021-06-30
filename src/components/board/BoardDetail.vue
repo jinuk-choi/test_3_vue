@@ -5,14 +5,19 @@
           <td colspan="2" style="font-weight:700;">제목: {{board_detail.aTitle}}</td>
         </tr>
         <tr style="font-size:0.9rem;">
-          <td style="text-align:right">작성일: {{board_detail.aDate}}</td>
+          <td style="text-align:left">작성자: {{board_detail.user.name}}</td>
+        </tr>
+        <tr style="font-size:0.9rem;">
+          <td style="text-align:left">작성일: {{board_detail.aDate}}</td>
         </tr>
         <tr>
           <td colspan="2" style="border:none;">내용: {{board_detail.aContent}}</td>
         </tr>
         <tr>
           <td colspan="2" style="border:none;text-align:right;border-top:3px double #ededed">
-            <v-btn @click="BoardDelete({aIdx:aIdx})">삭제</v-btn>
+            <v-btn  router :to="{name:'boardwrite', params:{aDepth: board_detail.aDepth}}">답글</v-btn>
+            <v-btn  router :to="{name:'boardEdit'}">수정</v-btn>
+            <v-btn @click="BoardDelete($route.params.aIdx)">삭제</v-btn>
           </td>
         </tr>
       </table>
@@ -20,17 +25,34 @@
 </template>
 <script>
 import { mapActions, mapState } from "vuex"
+import axios from 'axios'
+import Route from '@/router/index'
 export default {
+
     data() {
       return {
-        aIdx : this.$route.params.aIdx,
       }
     },
+
     computed: {
        ...mapState(["board_detail"])
     },
     methods: {
-      ...mapActions(["BoardDelete"])
+
+      BoardDelete(aIdx) {
+        return new Promise((resolve, reject) => {
+          axios.delete('http://localhost:9100/api/test/boardDelete/'+aIdx)
+              .then(Response => {
+                  console.log(Response.data)
+                  Route.push("/board/boardlist")
+              })
+              .catch(Error => {
+                  console.log('error')
+                  reject(Error)
+              })
+        })
+      },
+
     }
 }
 </script>

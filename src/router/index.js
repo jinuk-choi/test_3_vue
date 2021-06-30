@@ -8,6 +8,7 @@ import SignUp from '@/components/board/SignUp';
 import User from '@/views/User'; 
 import admin from '@/components/board/admin';
 import boardDetail from '@/components/board/BoardDetail'
+import boardEdit from '@/components/board/BoardEdit';
 
 Vue.use(Router); //vue 라우터 사용
 
@@ -19,10 +20,9 @@ export default new Router({ //라우터 연결
 			,component:HelloWorld
 		}
 		,{
-			path:'/board/boardlist/'
+			path:'/board/boardlist'
 			,name:'BoardList'
 			,component:BoardList
-			,props: true
 		}
 		
 		,{
@@ -60,6 +60,12 @@ export default new Router({ //라우터 연결
 			,name: 'boardDetail'
 			,component: boardDetail
 		  }
+		
+		,{
+			path:'/board/edit'
+			,name:'boardEdit'
+			,component:boardEdit
+		}
 		
 	]
 

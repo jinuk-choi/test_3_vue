@@ -7,14 +7,14 @@
             <th class="text-left">
               NO
             </th>
-            <th class="text-left">
-              작성자
-            </th>
-            <th class="text-left">
+            <th style="width: 200px;" class="text-left">
               제목
             </th>
-            <th class="text-left">
+            <th style="width: 200px;" class="text-left">
               내용
+            </th>
+            <th class="text-left">
+              작성자
             </th>
             <th class="text-left">
               조회수
@@ -31,9 +31,13 @@
             @click="boardDetail(item.aIdx)"
           >
             <td>{{ item.rownum }}</td>
-            <td>{{ item.user.name }}</td>
-            <td>{{ item.aTitle }}</td>
+            <td>
+              <span v-if="item.aDepth > 1">
+                <span v-for="n in item.aDepth-1" v-bind:key="n">ㄴ</span>
+              </span> {{ item.aTitle }}
+            </td>
             <td>{{ item.aContent }}</td>
+            <td>{{ item.user.name }}</td>
             <td>{{ item.aCount }}</td>
             <td>{{ item.aDate }}</td>
           </tr>
@@ -42,10 +46,11 @@
             <v-pagination
               v-model="page"
               :length="pagination.lastPage"
-              :total-visible="8"
+              :total-visible="5"
               @input="next(page)"
             ></v-pagination>
           </div>
+          
       </template>
   </v-simple-table>
 </template>
@@ -68,7 +73,7 @@ export default {
 
   },
   methods: {
-    ...mapActions(['boardDetail','boardWrite']),
+    ...mapActions(['boardDetail']),
 
     next (page) {
       axios.get('http://localhost:9100/api/test/user/'+page )

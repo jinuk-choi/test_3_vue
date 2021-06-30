@@ -8,8 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    Userinfo:{User_Id:null,User_Name:null,User_auth:[],User_token:null},
-
+    Userinfo:{User_Id:null,User_Name:null,User_auth:[],User_token:null,User_Idx:null},
     board_detail:[],
     UserList:[]
   },
@@ -44,6 +43,7 @@ export default new Vuex.Store({
     // }
     SET_USER(state, data) {
       state.Userinfo.User_Id = data.username
+      state.Userinfo.User_Idx = data.uIdx
       state.Userinfo.User_Name = data.name
       state.Userinfo.User_auth = data.authorities
       state.Userinfo.User_token = data.token
@@ -68,12 +68,14 @@ export default new Vuex.Store({
    },
    SET_USER_REFRESH(state,data) {
     state.Userinfo.User_Id = data.username
+    state.Userinfo.User_Idx = data.uIdx
     state.Userinfo.User_Name = data.name
     state.Userinfo.User_auth = data.authorities
     state.Userinfo.User_token = data.token
    },
    logout(state) {
     state.Userinfo.User_Id = null
+    state.Userinfo.User_Idx = null
     state.Userinfo.User_Name = null
     state.Userinfo.User_auth = null
     state.Userinfo.User_token = null

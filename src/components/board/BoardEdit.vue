@@ -1,7 +1,6 @@
 <template>
     <v-flex xs12 >
         <v-form style="width:800px;margin:0 auto;">
-            <span>작성자: {{ Userinfo.User_Name }}</span>
             <v-text-field
                 v-model="aTitle"
                 label="제목"
@@ -15,7 +14,7 @@
                 type="text"
             ></v-textarea>
         </v-form>
-        <v-btn @click="boardWrite({aTitle,aContent,aGroup,aOrder,aDepth})">등록</v-btn>
+        <v-btn @click="boardEdit({aTitle,aContent})">등록</v-btn>
     </v-flex>
 </template>
 <script>
@@ -31,13 +30,13 @@ export default {
         }
     },
     computed: {
-        ...mapState(["Userinfo"])
+        ...mapState(["board_detail"])
     },
     methods: {
-        boardWrite(payload) {
-          payload.uIdx = this.Userinfo.User_Idx
+        boardEdit(payload) {
+          payload.aIdx = this.board_detail.aIdx
           return new Promise((resolve, reject) => {
-            axios.post('http://localhost:9100/api/test/boardWrite', payload)
+            axios.post('http://localhost:9100/api/test/boardEdit', payload)
                 .then(Response => {
                     console.log(Response.data)
                      Route.push("/board/boardlist")
