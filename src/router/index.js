@@ -7,8 +7,9 @@ import Login from '@/components/board/Login'; //로그인 컴포넌트 호출
 import SignUp from '@/components/board/SignUp'; 
 import User from '@/views/User'; 
 import admin from '@/components/board/admin';
-import boardDetail from '@/components/board/BoardDetail'
+import boardDetail from '@/components/board/BoardDetail';
 import boardEdit from '@/components/board/BoardEdit';
+import commentList from '@/components/board/CommentList';
 
 Vue.use(Router); //vue 라우터 사용
 
@@ -29,6 +30,7 @@ export default new Router({ //라우터 연결
 			path:'/board/write'
 			,name:'boardwrite'
 			,component:boardWrite
+			,props: true
 		}
 
 		,{
@@ -65,6 +67,12 @@ export default new Router({ //라우터 연결
 			path:'/board/edit'
 			,name:'boardEdit'
 			,component:boardEdit
+		}
+
+		,{
+			path:'/board/commentList'
+			,name:'commentList'
+			,component:commentList
 		}
 		
 	]

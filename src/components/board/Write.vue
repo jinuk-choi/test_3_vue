@@ -23,6 +23,22 @@ import { mapState,mapActions } from 'vuex'
 import axios from 'axios'
 import Route from '@/router/index'
 export default {
+    name: 'Params',
+        props: {
+            aDepth: {
+                type: Number,
+                default : 0
+            },
+            aOrder: {
+                type: Number,
+                default : 0
+            },
+            aGroup: {
+                type: Number,
+                default : 0
+            }
+        },
+
     data() {
         return {
             aTitle: null,

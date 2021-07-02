@@ -50,7 +50,6 @@
               @input="next(page)"
             ></v-pagination>
           </div>
-          
       </template>
   </v-simple-table>
 </template>
@@ -94,7 +93,7 @@ export default {
               .then(Response => {
                   console.log(Response.data)
                   this.pagination = Response.data
-                  this.List = this.pagination.boardList
+                  this.List = this.pagination.list
               })
               .catch(Error => {
                   console.log('error')

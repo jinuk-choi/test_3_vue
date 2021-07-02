@@ -15,19 +15,29 @@
         </tr>
         <tr>
           <td colspan="2" style="border:none;text-align:right;border-top:3px double #ededed">
-            <v-btn  router :to="{name:'boardwrite', params:{aDepth: board_detail.aDepth}}">답글</v-btn>
+            <v-btn  router :to="{name:'boardwrite', params:{aDepth: board_detail.aDepth
+                                                           ,aGroup: board_detail.aGroup
+                                                           ,aOrder: board_detail.aOrder}}">답글</v-btn>
             <v-btn  router :to="{name:'boardEdit'}">수정</v-btn>
             <v-btn @click="BoardDelete($route.params.aIdx)">삭제</v-btn>
           </td>
         </tr>
       </table>
+      <h2 style="text-align:center">댓글리스트</h2>
+      <CommentList :aIdx="board_detail.aIdx"></CommentList>
   </v-flex>
+  
 </template>
 <script>
 import { mapActions, mapState } from "vuex"
 import axios from 'axios'
 import Route from '@/router/index'
+import CommentList from './CommentList.vue'
+
 export default {
+  components: { 
+    CommentList
+  },
 
     data() {
       return {
