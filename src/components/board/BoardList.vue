@@ -1,8 +1,18 @@
+
 <template>
   <v-simple-table>
       <template v-slot:default>
         <thead>
-          <v-btn  router :to="{name:'boardwrite'}">글쓰기</v-btn> 
+          <v-btn router :to="{name:'boardwrite'}" >글쓰기</v-btn>&nbsp; 
+            <select v-model="selected" >
+              <option disabled value="">Please select one</option>
+              <option value="1">제목</option>
+              <option value="2">내용</option>
+              <option value="4">작성자</option>
+            </select>&nbsp;
+              <input v-model="search"  type="text" placeholder="search.." class="form-group">
+              <p></p>
+              <v-btn @click="BoardSearch({type: selected, keyword: search, page: page})">검색</v-btn>
           <tr>
             <th class="text-left">
               NO
@@ -53,6 +63,7 @@
       </template>
   </v-simple-table>
 </template>
+
 <script>
 import { mapActions,mapState } from "vuex"
 import axios from 'axios'
@@ -60,11 +71,14 @@ export default {
   
   data () {
       return {
-        pagination: null,
-        page: null,
-        List: null
+        pagination: {},
+        page: 1,
+        List: [],
+        selected: '',
+        search:''
       }
   },
+  
   created() {
     this.boardList()
   },
@@ -74,12 +88,25 @@ export default {
   methods: {
     ...mapActions(['boardDetail']),
 
+    BoardSearch (payload) {
+      axios.get('http://localhost:9100/api/test/user/'+payload.page+ '/' +payload.type+ '/' +payload.keyword )
+        .then(Response => {
+            console.log(Response.data)
+            this.pagination = Response.data
+            this.List = this.pagination.list
+        })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+        })
+    },
+
     next (page) {
       axios.get('http://localhost:9100/api/test/user/'+page )
         .then(Response => {
             console.log(Response.data)
             this.pagination = Response.data
-            this.List = this.pagination.boardList
+            this.List = this.pagination.list
         })
         .catch(Error => {
             console.log('error')

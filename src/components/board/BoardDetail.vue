@@ -23,8 +23,10 @@
           </td>
         </tr>
       </table>
-      <h2 style="text-align:center">댓글리스트</h2>
-      <CommentList :aIdx="board_detail.aIdx"></CommentList>
+          <CommentWrite :aIdx="board_detail.aIdx"></CommentWrite>
+        <h2 style="text-align:center">댓글리스트</h2>
+          <p></p>
+          <CommentList :aIdx="board_detail.aIdx"></CommentList>
   </v-flex>
   
 </template>
@@ -33,10 +35,12 @@ import { mapActions, mapState } from "vuex"
 import axios from 'axios'
 import Route from '@/router/index'
 import CommentList from './CommentList.vue'
+import CommentWrite from './CommentWrite.vue'
 
 export default {
   components: { 
-    CommentList
+    CommentList,
+    CommentWrite
   },
 
     data() {
